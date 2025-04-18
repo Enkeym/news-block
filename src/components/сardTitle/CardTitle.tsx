@@ -1,14 +1,11 @@
 import {
   AppstoreOutlined,
-  CaretDownOutlined,
-  DownOutlined,
   GlobalOutlined,
   InfoCircleOutlined,
   ReadOutlined,
   UserOutlined
 } from "@ant-design/icons"
 import { Button, Card, Tag, Tooltip, Typography } from "antd"
-import React, { useState } from "react"
 import { IData_SnippetNews } from "../../interfaces/news"
 import {
   formatCompactNumber,
@@ -16,9 +13,14 @@ import {
   getFlagImage,
   renderAuthors
 } from "../../utils/newsFormatters"
-import styles from "./NewsSnippet.module.scss"
+import styles from "./cardTitle.module.scss"
 
 const { Title, Text, Link } = Typography
+
+interface NewsSnippetProps {
+  data: IData_SnippetNews
+  showSentimentTag?: boolean
+}
 
 const getSentimentColor = (sent: string) => {
   switch (sent) {
@@ -33,29 +35,14 @@ const getSentimentColor = (sent: string) => {
   }
 }
 
-interface NewsSnippetProps {
-  data: IData_SnippetNews
-}
-
-const NewsSnippet: React.FC<NewsSnippetProps> = ({ data }) => {
-  const [expanded, setExpanded] = useState(false)
-  const [showAllTags, setShowAllTags] = useState(false)
-  const [showAllHighlights, setShowAllHighlights] = useState(false)
-
+const CardTitle: React.FC<NewsSnippetProps> = ({
+  data,
+  showSentimentTag = true
+}) => {
   const { day, month, year } = formatDate(data.DP)
 
-  const abLength = data.AB.length
-  const abStart = Math.floor(abLength * 0.25)
-  const abEnd = Math.floor(abLength * 0.75)
-  const abPreview = data.AB.slice(abStart, abEnd)
-
-  const maxTagsToShow = 5
-  const totalTags = data.KW.length
-  const visibleTags = showAllTags ? data.KW : data.KW.slice(0, maxTagsToShow)
-  const hiddenCount = totalTags - maxTagsToShow
-
   return (
-    <Card className={styles.newsCard}>
+    <Card className={styles.cardTitle}>
       {/* === TOP PANEL === */}
       <div className={styles.topPanel}>
         <div className="left">
@@ -72,8 +59,12 @@ const NewsSnippet: React.FC<NewsSnippetProps> = ({ data }) => {
             </Text>
           ))}
         </div>
+
         <div className="right">
-          <Tag color={getSentimentColor(data.SENT)}>{data.SENT}</Tag>
+          {showSentimentTag && (
+            <Tag color={getSentimentColor(data.SENT)}>{data.SENT}</Tag>
+          )}
+
           <Tooltip title="Пояснение сантимента">
             <Button
               icon={<InfoCircleOutlined />}
@@ -137,80 +128,8 @@ const NewsSnippet: React.FC<NewsSnippetProps> = ({ data }) => {
           </div>
         )}
       </div>
-
-      {/* === SNIPPET TEXT === */}
-      <div className={styles.snippetContent}>
-        <Text style={{ color: "#fff" }}>
-          {expanded ? data.AB : `...${abPreview}...`}
-        </Text>
-        {!expanded && (
-          <Button
-            style={{ alignSelf: "flex-start", paddingLeft: 0 }}
-            type="link"
-            size="small"
-            onClick={() => setExpanded(true)}
-          >
-            Show more
-            <CaretDownOutlined />
-          </Button>
-        )}
-      </div>
-
-      {/* === TAGS === */}
-      <div className={styles.tags}>
-        {visibleTags.map((tag) => (
-          <Tag className={styles.tag} key={tag.value}>
-            {tag.value}{" "}
-            {tag.count > 1 && <span className={styles.count}>{tag.count}</span>}
-          </Tag>
-        ))}
-
-        {!showAllTags && hiddenCount > 0 && (
-          <Button
-            type="link"
-            size="small"
-            onClick={() => setShowAllTags(true)}
-            className={styles.showMoreTagsBtn}
-          >
-            Show All +{hiddenCount}
-          </Button>
-        )}
-      </div>
-
-      {/* === Original Source === */}
-      <Link href={data.URL} target="_blank" className={styles.sourceLink}>
-        Original Source
-      </Link>
-
-      <div className={styles.duplicatesBar}>
-        <Text>
-          Duplicates: <Text strong>{data.HIGHLIGHTS.length}</Text>
-        </Text>
-
-        <Button className={styles.relevance}>
-          By Relevance
-          <DownOutlined />
-        </Button>
-      </div>
-
-      {/* === HIGHLIGHTS === */}
-      <div className={styles.highlights}>
-        {/* Место для компонента */}
-
-        {!showAllHighlights && data.HIGHLIGHTS.length > 1 && (
-          <Button
-            type="default"
-            size="small"
-            onClick={() => setShowAllHighlights(true)}
-            className={styles.showAllHighlightsBtn}
-          >
-            <DownOutlined />
-            View Duplicates
-          </Button>
-        )}
-      </div>
     </Card>
   )
 }
 
-export default NewsSnippet
+export default CardTitle

@@ -1,0 +1,52 @@
+.cardTitle {
+  background: none;
+  color: #ffffff;
+  transition: all 0.2s ease;
+  background: none;
+  border: none;
+
+  .topPanel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .data,
+    .reach {
+      margin-right: 15px;
+    }
+
+    .topTraffic,
+    .traffic {
+      margin-right: 5px;
+    }
+  }
+
+  .title {
+    color: #096dc7;
+    margin: 5px 0;
+  }
+
+  .metaBlock {
+    display: flex;
+  }
+
+  .dom {
+    text-decoration: underline;
+    margin-right: 10px;
+  }
+
+  .country,
+  .lang,
+  .authors {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+    border: none;
+    background: none;
+    color: #858a9ab8;
+  }
+
+  .authorsText {
+    color: #858a9ab8;
+  }
+}
