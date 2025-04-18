@@ -1,0 +1,27 @@
+/* index.css — глобальные сбросы и базовые стили */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Весь обычный текст — белый */
+.ant-typography {
+  color: #585f77;
+}
+
+.ant-typography span {
+  color: #ffffff;
+}
+
+/* Все ссылки — синие, даже внутри .ant-typography */
+.ant-typography a {
+  color: #1890ff;
+  text-decoration: none;
+}
+
+.ant-typography a:hover {
+  text-decoration: underline;
+}
