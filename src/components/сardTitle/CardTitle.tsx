@@ -20,6 +20,7 @@ const { Title, Text, Link } = Typography
 interface NewsSnippetProps {
   data: IData_SnippetNews
   showSentimentTag?: boolean
+  style?: React.CSSProperties
 }
 
 const getSentimentColor = (sent: string) => {
@@ -37,12 +38,13 @@ const getSentimentColor = (sent: string) => {
 
 const CardTitle: React.FC<NewsSnippetProps> = ({
   data,
-  showSentimentTag = true
+  showSentimentTag = true,
+  style
 }) => {
   const { day, month, year } = formatDate(data.DP)
 
   return (
-    <div className={styles.cardTitle}>
+    <div className={styles.cardTitle} style={style}>
       {/* === TOP PANEL === */}
       <div className={styles.topPanel}>
         <div className="left">

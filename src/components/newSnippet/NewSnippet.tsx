@@ -4,7 +4,6 @@ import React, { useState } from "react"
 import { IData_SnippetNews } from "../../interfaces/news"
 import CardTitle from "../сardTitle/CardTitle"
 import styles from "./NewsSnippet.module.scss"
-import { data } from "../../data"
 
 const { Text, Link } = Typography
 
@@ -78,7 +77,7 @@ const NewsSnippet: React.FC<NewsSnippetProps> = ({ data }) => {
 
       <div className={styles.duplicatesBar}>
         <Text>
-          Duplicates: <Text strong>{data.HIGHLIGHTS.length}</Text>
+          Duplicates: <Text strong>1</Text>
         </Text>
 
         <Button className={styles.relevance}>
@@ -87,21 +86,28 @@ const NewsSnippet: React.FC<NewsSnippetProps> = ({ data }) => {
         </Button>
       </div>
 
-      {/* === HIGHLIGHTS === */}
-      <div className={styles.highlights}>
-        {/* Место для компонента */}
+      {/* === Duplicates === */}
+      <div className={styles.duplicates}>
+        <CardTitle
+          data={data}
+          showSentimentTag={false}
+          style={{
+            border: "2px solid #0a467c",
+            borderRadius: "8px",
+            padding: "15px",
+            margin: "15px 0"
+          }}
+        />
 
-        {!showAllHighlights && data.HIGHLIGHTS.length > 1 && (
-          <Button
-            type="default"
-            size="small"
-            onClick={() => setShowAllHighlights(true)}
-            className={styles.showAllHighlightsBtn}
-          >
-            <DownOutlined />
-            View Duplicates
-          </Button>
-        )}
+        <Button
+          type="default"
+          size="small"
+          onClick={() => setShowAllHighlights(true)}
+          className={styles.viewButton}
+        >
+          <DownOutlined />
+          View Duplicates
+        </Button>
       </div>
     </Card>
   )

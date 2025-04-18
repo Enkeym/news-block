@@ -36,12 +36,6 @@
     background: #313352;
   }
 
-  .duplicatesBar {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-  }
-
   .relevance {
     background: none;
     border: none;
@@ -51,6 +45,29 @@
       background: transparent !important;
       box-shadow: none !important;
       color: #ffffff !important;
+    }
+  }
+
+  .duplicatesBar {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .viewButton {
+    width: 100%;
+    background: none;
+    border: 1px solid #585f77;
+    border-radius: 5px;
+    color: #fff;
+    padding: 15px 0;
+
+    &:hover {
+      background: transparent !important;
+      box-shadow: none !important;
+      color: #ffffff !important;
+      border: 1px solid #fff !important;
     }
   }
 }
