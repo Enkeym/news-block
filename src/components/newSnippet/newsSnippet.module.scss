@@ -1,51 +1,10 @@
 .newsCard {
+  .newsCard .ant-card-body {
+    padding: 0 !important;
+  }
+
   background: none;
   border: 1px solid #313352;
-
-  .topPanel {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .data,
-    .reach {
-      margin-right: 15px;
-    }
-
-    .topTraffic,
-    .traffic {
-      margin-right: 5px;
-    }
-  }
-
-  .title {
-    color: #096dc7;
-    margin: 5px 0;
-  }
-
-  .metaBlock {
-    display: flex;
-  }
-
-  .dom {
-    text-decoration: underline;
-    margin-right: 10px;
-  }
-
-  .country,
-  .lang,
-  .authors {
-    display: flex;
-    align-items: center;
-    margin-right: 5px;
-    border: none;
-    background: none;
-    color: #858a9ab8;
-  }
-
-  .authorsText {
-    color: #858a9ab8;
-  }
 
   .snippetContent {
     display: flex;

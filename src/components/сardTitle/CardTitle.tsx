@@ -5,7 +5,7 @@ import {
   ReadOutlined,
   UserOutlined
 } from "@ant-design/icons"
-import { Button, Card, Tag, Tooltip, Typography } from "antd"
+import { Button, Tag, Tooltip, Typography } from "antd"
 import { IData_SnippetNews } from "../../interfaces/news"
 import {
   formatCompactNumber,
@@ -42,7 +42,7 @@ const CardTitle: React.FC<NewsSnippetProps> = ({
   const { day, month, year } = formatDate(data.DP)
 
   return (
-    <Card className={styles.cardTitle}>
+    <div className={styles.cardTitle}>
       {/* === TOP PANEL === */}
       <div className={styles.topPanel}>
         <div className="left">
@@ -102,7 +102,7 @@ const CardTitle: React.FC<NewsSnippetProps> = ({
           rel="noopener noreferrer"
           className={styles.dom}
         >
-          <GlobalOutlined width={10} height={10} />
+          <GlobalOutlined width={10} height={10} style={{ marginRight: 5 }} />
           {data.DOM}
         </a>
 
@@ -112,12 +112,13 @@ const CardTitle: React.FC<NewsSnippetProps> = ({
             alt={data.CNTR}
             width={10}
             height={10}
+            style={{ marginRight: 5 }}
           />
           {data.CNTR}
         </Tag>
 
         <Tag className={styles.lang}>
-          <ReadOutlined />
+          <ReadOutlined style={{ marginRight: 5 }} />
           {data.LANG}
         </Tag>
 
@@ -128,7 +129,7 @@ const CardTitle: React.FC<NewsSnippetProps> = ({
           </div>
         )}
       </div>
-    </Card>
+    </div>
   )
 }
 

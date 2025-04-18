@@ -1,5 +1,5 @@
 import { Alert, Flex, Layout, Spin } from "antd"
-import CardTitle from "./components/сardTitle/CardTitle"
+import NewsSnippet from "./components/newSnippet/NewSnippet"
 import { useGetNewsSnippetQuery } from "./services/newsApi"
 
 const { Content } = Layout
@@ -23,7 +23,7 @@ function App() {
           {error && <Alert type="error" message="Ошибка загрузки данных." />}
           {data && (
             <div style={{ maxWidth: "60%" }}>
-              <CardTitle data={data} />
+              <NewsSnippet data={data} />
             </div>
           )}
         </Flex>
