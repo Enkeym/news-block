@@ -13,7 +13,7 @@ import {
   getFlagImage,
   renderAuthors
 } from "../../utils/newsFormatters"
-import styles from "./cardTitle.module.scss"
+import styles from "./CardTitle.module.scss"
 
 const { Title, Text, Link } = Typography
 
