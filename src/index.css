@@ -7,7 +7,10 @@
   box-sizing: border-box;
 }
 
-/* Весь обычный текст — белый */
+.ant-card-body {
+  padding: 20px 15px !important;
+}
+
 .ant-typography {
   color: #585f77;
 }
@@ -16,7 +19,6 @@
   color: #ffffff;
 }
 
-/* Все ссылки — синие, даже внутри .ant-typography */
 .ant-typography a {
   color: #1890ff;
   text-decoration: none;
@@ -24,4 +26,23 @@
 
 .ant-typography a:hover {
   text-decoration: underline;
+}
+
+.contentWrapper {
+  max-width: 60%;
+  width: 100%;
+
+  @media (max-width: 1200px) {
+    max-width: 80%;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 95%;
+    padding: 0 10px;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 95%;
+    padding: 0 5px;
+  }
 }

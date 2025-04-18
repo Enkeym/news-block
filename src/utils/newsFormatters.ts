@@ -30,3 +30,45 @@ export const renderAuthors = (authors: string[]) => {
 
 export const getFlagImage = (countryCode: string, size: number = 20) =>
   `https://flagcdn.com/w${size}/${countryCode.toLowerCase()}.png`
+
+export type HighlightPart = {
+  text: string
+  isKeyword: boolean
+}
+
+export const parseHighlightParts = (highlight: string): HighlightPart[] => {
+  const parts = highlight.split(/(<kw>.*?<\/kw>)/g)
+
+  return parts
+    .filter((part) => part.length > 0)
+    .map((part) => {
+      const isKeyword = part.startsWith("<kw>") && part.endsWith("</kw>")
+      const text = isKeyword ? part.replace(/<\/?kw>/g, "") : part
+      return { text, isKeyword }
+    })
+}
+
+export const truncateHighlightParts = (
+  parts: HighlightPart[],
+  maxLength: number
+): HighlightPart[] => {
+  const result: HighlightPart[] = []
+  let totalLength = 0
+
+  for (const part of parts) {
+    if (totalLength >= maxLength) break
+
+    const remaining = maxLength - totalLength
+    const cutText =
+      part.text.length > remaining ? part.text.slice(0, remaining) : part.text
+
+    result.push({
+      ...part,
+      text: cutText
+    })
+
+    totalLength += cutText.length
+  }
+
+  return result
+}

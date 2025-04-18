@@ -2,8 +2,12 @@ import { CaretDownOutlined, DownOutlined } from "@ant-design/icons"
 import { Button, Card, Tag, Typography } from "antd"
 import React, { useState } from "react"
 import { IData_SnippetNews } from "../../interfaces/news"
+import {
+  parseHighlightParts,
+  truncateHighlightParts
+} from "../../utils/newsFormatters"
 import CardTitle from "../сardTitle/CardTitle"
-import styles from "./NewsSnippet.module.scss"
+import styles from "./newsSnippet.module.scss"
 
 const { Text, Link } = Typography
 
@@ -14,12 +18,10 @@ interface NewsSnippetProps {
 const NewsSnippet: React.FC<NewsSnippetProps> = ({ data }) => {
   const [expanded, setExpanded] = useState(false)
   const [showAllTags, setShowAllTags] = useState(false)
-  const [showAllHighlights, setShowAllHighlights] = useState(false)
 
-  const abLength = data.AB.length
-  const abStart = Math.floor(abLength * 0.25)
-  const abEnd = Math.floor(abLength * 0.75)
-  const abPreview = data.AB.slice(abStart, abEnd)
+  const highlightText = data.HIGHLIGHTS.join(" ")
+  const parsedParts = parseHighlightParts(highlightText)
+  const collapsedParts = truncateHighlightParts(parsedParts, 365)
 
   const maxTagsToShow = 5
   const totalTags = data.KW.length
@@ -34,7 +36,16 @@ const NewsSnippet: React.FC<NewsSnippetProps> = ({ data }) => {
       {/* === SNIPPET TEXT === */}
       <div className={styles.snippetContent}>
         <Text style={{ color: "#fff" }}>
-          {expanded ? data.AB : `...${abPreview}...`}
+          {(expanded ? parsedParts : collapsedParts).map((p, i) =>
+            p.isKeyword ? (
+              <span key={i} className={styles.keywordHighlight}>
+                {p.text}
+              </span>
+            ) : (
+              <React.Fragment key={i}>{p.text}</React.Fragment>
+            )
+          )}
+          {!expanded && "..."}
         </Text>
         {!expanded && (
           <Button
@@ -99,12 +110,7 @@ const NewsSnippet: React.FC<NewsSnippetProps> = ({ data }) => {
           }}
         />
 
-        <Button
-          type="default"
-          size="small"
-          onClick={() => setShowAllHighlights(true)}
-          className={styles.viewButton}
-        >
+        <Button type="default" size="small" className={styles.viewButton}>
           <DownOutlined />
           View Duplicates
         </Button>

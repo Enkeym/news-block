@@ -1,8 +1,4 @@
 .newsCard {
-  .newsCard .ant-card-body {
-    padding: 0 !important;
-  }
-
   background: none;
   border: 1px solid #313352;
 
@@ -10,6 +6,14 @@
     display: flex;
     flex-direction: column;
     margin: 10px 0;
+  }
+
+  .keywordHighlight {
+    background: #0772cb;
+    border-radius: 5px;
+    padding: 1px 3px;
+    margin: 1px;
+    font-weight: 500;
   }
 
   .tags {
@@ -68,6 +72,61 @@
       box-shadow: none !important;
       color: #ffffff !important;
       border: 1px solid #fff !important;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .snippetContent {
+    font-size: 14px;
+  }
+
+  .viewButton {
+    font-size: 14px;
+  }
+
+  .tags {
+    flex-direction: row;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .newsCard {
+    padding: 15px;
+
+    .keywordHighlight {
+      font-size: 13px;
+    }
+  }
+
+  .tags {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .viewButton {
+    padding: 12px 0;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .newsCard {
+    padding: 10px;
+
+    .snippetContent {
+      font-size: 16px;
+    }
+
+    .tags {
+      margin: 10px 0;
+    }
+
+    .viewButton {
+      padding: 10px 0;
+      font-size: 13px;
     }
   }
 }

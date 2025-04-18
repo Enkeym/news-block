@@ -12,9 +12,10 @@ function App() {
       <Content>
         <Flex
           justify="center"
-          align="center"
+          align="start"
           style={{
             minHeight: "100vh",
+            padding: "40px 0",
             background:
               "linear-gradient(150deg, rgb(37, 34, 64) 0%, rgb(0, 0, 0) 60%)"
           }}
@@ -22,7 +23,7 @@ function App() {
           {isLoading && <Spin size="large" />}
           {error && <Alert type="error" message="Ошибка загрузки данных." />}
           {data && (
-            <div style={{ maxWidth: "60%" }}>
+            <div className="contentWrapper">
               <NewsSnippet data={data} />
             </div>
           )}
